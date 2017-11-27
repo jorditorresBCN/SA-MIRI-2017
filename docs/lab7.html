@@ -238,7 +238,10 @@ int main(int argc, char *argv[]) {
                     <ul>
                         <li>Complete the program.</li>
                         <li>Modify the N global variable to fit your requirements.</li>
-                        <li>Compile on the Minotauro login node  TODO
+                        <li>Compile on the Minotauro login node. Hint:
+                            <pre><code class="bash">
+nvcc -I/opt/mpi/bullxmpi/1.2.9.1/include -L/opt/mpi/bullxmpi/1.2.9.1/lib -lmpi -ldl -lm -lnuma -lrt -lnsl -lutil -lm -ldl mmpmpicuda.cu -o mmpmpicuda       
+                            </code></pre>
                         </li>
                         <li>Create a task file with K80 nodes, and ask for 2 GPUs (2 is the minimun allowed).</li>
 
