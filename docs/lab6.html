@@ -149,6 +149,11 @@
                         </tbody>
                     </table>
                     
+                     <p>Hint: Add this line to your job file if you are using a reservation:<p>
+                        <pre><code class="bash"># Add this if you are using mnsubmit
+# @ reservation = YOUR_RESERVATION
+# Add this if you are using SBATCH
+#SBATCH --reservation=YOUR_RESERVATION</code></pre>
                 </div>
             </div>
 
@@ -157,6 +162,9 @@
                     <h3 class="panel-title"><span class="autosection">numsection</span> CUDA Hello World</h3>
                 </div>
                 <div class="panel-body">
+                    <p>Hint: Ask for an interactive node using:<p>
+                        <pre><code class="bash">mnsh -k -g 1 </code></pre>
+
                     <h5><strong class="autotask">task</strong>: Create and run a CUDA Hello World in a CPU of an interactive node of
                         MinoTauro.
                     </h5>
