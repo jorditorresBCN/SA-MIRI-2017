@@ -149,11 +149,28 @@
                         </tbody>
                     </table>
                     
-                     <p>Hint: Add this line to your job file if you are using a reservation:<p>
-                        <pre><code class="bash"># Add this if you are using mnsubmit
-# @ reservation = YOUR_RESERVATION
-# Add this if you are using SBATCH
-#SBATCH --reservation=YOUR_RESERVATION</code></pre>
+                    <p>Hint: Example job file (2 Nodes)</p>
+                    <pre><code>#!/bin/bash
+#SBATCH --job-name=cuda_k80
+#SBATCH -D .
+#SBATCH --output=k80_%j.out
+#SBATCH --error=k80_%j.err
+#SBATCH --ntasks=2
+#SBATCH --ntasks-per-node=1
+#SBATCH --nodes=2
+#SBATCH --gres gpu:2
+#SBATCH --cpus-per-task=8
+#SBATCH --constraint=k80
+#SBATCH --time=00:02:00
+
+...</code></pre>
+
+                    <p>Hint: Add this to run a job using the reservation queue</p>
+                    <pre><code>#SBATCH --reservation=YOUR_RESERVATION</code></pre>
+
+                    <p>Hint: Add this to run a job using the debug queue</p>
+                    <pre><code>#SBATCH --partition=debug
+#SBATCH --qos=debug</code></pre>
                 </div>
             </div>
 

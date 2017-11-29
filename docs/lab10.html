@@ -145,7 +145,8 @@ padding-bottom: 20px;"/></div>
                         <li>You can only ask for 2 or 4 GPUs (0, 1 and 3 are incorrect configurations). If you want, you do not have to use all GPUs.</li>
                         <li>In these experiments the numer of cores is not relevant, we will put 16 cores in every job file.</li>
                         <li>We will use the K80 nodes:
-                            <pre><code># @ features=k80</code></pre>
+                            <pre><code>#SBATCH --constraint=k80
+#SBATCH --gres: gpu:NUMBER_OF_GPUS</code></pre>
                         </li>
                         <li>In the <em>vgg.py</em> file, the flag <em>--num_gpu</em> controls the number of graphics cards that will be used during the training. Modifiy it depending of the number of GPUs that you have and you need.</li>                
                     </ul> 
@@ -201,22 +202,25 @@ padding-bottom: 20px;"/></div>
 
                     <p>Hint: Example job file</p>
                     <pre><code>#!/bin/bash
-# @ job-name=keras
-# @ initialdir=/home/bsc31/bsc31XXX/keras
-# @ output=keras_2gpu_1gpuused.out
-# @ error=keras_2gpu_1gpuused.err
-# @ total_tasks=1
-# @ gpus_per_node=2
-# @ cpus_per_task=16
-# @ features=k80
-# @ wall_clock_limit=00:15:00
+#SBATCH --job-name=keras_k80
+#SBATCH -D .
+#SBATCH --output=k80_%j.out
+#SBATCH --error=k80_%j.err
+#SBATCH --ntasks=1
+#SBATCH --gres gpu:2
+#SBATCH --cpus-per-task=8
+#SBATCH --constraint=k80
+#SBATCH --time=00:15:00
 
 module purge; module load K80 cuda/8.0 mkl/2017.1 CUDNN/5.1.10-cuda_8.0 intel-opencl/2016 python/3.6.0+_ML
 python vgg.py --num_gpu=1</code></pre>
 
-                    <p>Hint: Add this to run a job in the debug queue</p>
-                    <pre><code># @ partition=debug
-# @ class=debug</code></pre>
+                    <p>Hint: Add this to run a job using the reservation queue</p>
+                    <pre><code>#SBATCH --reservation=YOUR_RESERVATION</code></pre>
+
+                    <p>Hint: Add this to run a job using the debug queue</p>
+                    <pre><code>#SBATCH --partition=debug
+#SBATCH --qos=debug</code></pre>
 
                 </div>
             </div>
